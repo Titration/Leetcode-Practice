@@ -8,12 +8,9 @@ class Solution {
                 if (p1 != k) {
                     nums[k] = nums[p1];
                 }
-                p1++;
                 k++;
             }
-            else {
-                p1++;
-            }
+            p1++;
         }
         return k;
     }
