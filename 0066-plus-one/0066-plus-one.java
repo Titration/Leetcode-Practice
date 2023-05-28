@@ -8,13 +8,11 @@ class Solution {
             }
             else {
                 digits[i] = 0;
-                if (i-1 < 0) { //case: i < 0
-                    int[] res = new int[digits.length + 1];
-                    res[0] = 1;
-                    return res;
-                }
             }
         }
+        digits = new int[digits.length + 1];
+        digits[0] = 1;
+
         return digits;
     }
 }
