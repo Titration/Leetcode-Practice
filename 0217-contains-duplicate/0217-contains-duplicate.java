@@ -13,15 +13,25 @@ class Solution {
         // return false;
         */
         
-        /* Approach 2:
-        
-        */
+        /* Approach 2: HashSet()
         HashSet<Integer> nums_hashset = new HashSet<>();
         for (int num : nums) {
             if (nums_hashset.contains(num)) {
                 return true;
             }
             nums_hashset.add(num);
+        }
+        return false;
+        */
+        
+        /*Approach 3: HashMap()
+        */
+        HashMap<Integer, Integer> nums_hashmap = new HashMap<>();
+        for (int num : nums) {
+            if (nums_hashmap.containsKey(num) && nums_hashmap.get(num) >= 1) {
+                return true;
+            }
+            nums_hashmap.put(num, nums_hashmap.getOrDefault(num, 0) + 1);
         }
         return false;
     }
