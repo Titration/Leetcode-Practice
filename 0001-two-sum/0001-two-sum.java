@@ -7,11 +7,11 @@ class Solution {
             map.put(nums[i], i);
         }
         for (int i = 0; i < nums.length; i++) {
-            int key = target - nums[i];
-            if (map.containsKey(key) && i != map.get(key)) {
-                return new int[] {i, map.get(key)};
+            int value = target - nums[i];
+            if (map.containsKey(value) && map.get(value) != i) {
+                return new int[] {i, map.get(value)};
             }
         }
-        return new int[] {};
+        return new int[2];
     }
 }
