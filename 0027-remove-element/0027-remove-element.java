@@ -7,18 +7,16 @@ class Solution {
         int left = 0;
         int right = nums.length - 1;
 
-        while (right >= 0 && nums[right] == val) right--; //将right移到从右数第一个值不为val的位置
-        
         while (left <= right) {
             if (nums[left] == val) {
                 nums[left] = nums[right];
                 right--;
+            }    
+            else {
+                left++;
             }
-            left++;
-            while (right >= 0 && nums[right] == val) right--;
         }
-        
         return left;
-
+        
     }
 }
