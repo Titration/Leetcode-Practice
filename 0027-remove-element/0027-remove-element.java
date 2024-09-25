@@ -1,16 +1,24 @@
-// Using slow & faster pointers
+// Using two pointers
 // Time complexity: O(n)
 // Space complexity: O(1)
 class Solution {
     public int removeElement(int[] nums, int val) {
         
-        int slow = 0;
-        for (int fast = 0; fast < nums.length; fast++) {
-            if (nums[fast] != val) {
-                nums[slow] = nums[fast];
-                slow++;
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (right >= 0 && nums[right] == val) right--; //将right移到从右数第一个值不为val的位置
+        
+        while (left <= right) {
+            if (nums[left] == val) {
+                nums[left] = nums[right];
+                right--;
             }
+            left++;
+            while (right >= 0 && nums[right] == val) right--;
         }
-        return slow;
+        
+        return left;
+
     }
 }
