@@ -15,9 +15,38 @@ public class Solution {
         ListNode currA = headA;
         ListNode currB = headB;
 
+        int lenA = 0;
+        int lenB = 0;
+
+        while (currA != null) {
+            currA = currA.next;
+            lenA++;
+        }
+        while (currB != null) {
+            currB = currB.next;
+            lenB++;
+        }
+        currA = headA;
+        currB = headB;
+
+        if (lenB > lenA) {
+            // swap length
+            int tempLength = lenA;
+            lenA = lenB;
+            lenB = tempLength;
+            // swap node
+            ListNode tempNode = currA;
+            currA = currB;
+            currB = tempNode;
+        }
+        int diff = lenA - lenB;
+        while (diff > 0) {
+            currA = currA.next;
+            diff--;
+        }
         while (currA != currB) {
-            currA = currA != null ? currA.next : headB;
-            currB = currB != null ? currB.next : headA;
+            currA = currA.next;
+            currB = currB.next;
         }
         return currA;
     }
