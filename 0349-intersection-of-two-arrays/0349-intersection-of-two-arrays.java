@@ -1,21 +1,29 @@
 class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
         
-        Set<Integer> hashset = new HashSet<>();
+        //since the constrains given the length of nums1 & nums2
+        int[] arr1 = new int[1001];
+        int[] arr2 = new int[1001];
         List<Integer> list = new ArrayList<>();
-
-        for (int i = 0; i < nums1.length; i++) {
-            hashset.add(nums1[i]);
+        
+        for (int i : nums1) {
+            arr1[i]++;
         }
-        for (int i = 0; i < nums2.length; i++) {
-            if (hashset.contains(nums2[i]) && !list.contains(nums2[i])) {
-                list.add(nums2[i]);
+        for (int i : nums2) {
+            arr2[i]++;
+        }
+        for (int i = 0; i < 1001; i++) {
+            if (arr1[i] > 0 && arr2[i] > 0) {
+                list.add(i); // I was wrong because this: list.add(arr1[i]);
             }
         }
+        
+        int index = 0;
         int[] result = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            result[i] = list.get(i);
+        for (int i : list) {
+            result[index++] = i;
         }
+        
         return result;
     }
 }
