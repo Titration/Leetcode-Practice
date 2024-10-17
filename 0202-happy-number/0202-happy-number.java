@@ -17,7 +17,6 @@ class Solution {
             result += temp * temp;
             n = n / 10;
         }
-
         return result;
     }
 }
