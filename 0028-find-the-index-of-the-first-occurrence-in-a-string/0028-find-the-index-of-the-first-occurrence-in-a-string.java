@@ -49,8 +49,7 @@ class Solution {
     public int[] lps2(String s) {
         int[] next = new int[s.length()];
         int prev_len = 0;
-        int i = 1;
-        while (i < next.length) {
+        for (int i = 1; i < next.length; i++) {
             while (prev_len > 0 && s.charAt(i) != s.charAt(prev_len)) {
                 prev_len = next[prev_len - 1];
             }
@@ -58,7 +57,6 @@ class Solution {
                 prev_len++;
             }
             next[i] = prev_len;
-            i++;
         }
         return next;
     }
