@@ -54,13 +54,10 @@ class Solution {
             while (prev_len > 0 && s.charAt(i) != s.charAt(prev_len)) {
                 prev_len = next[prev_len - 1];
             }
-            if (prev_len == 0) {
-                next[i] = prev_len;
-            }
             if (s.charAt(i) == s.charAt(prev_len)) {
                 prev_len++;
-                next[i] = prev_len;
             }
+            next[i] = prev_len;
             i++;
         }
         return next;
