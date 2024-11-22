@@ -1,40 +1,24 @@
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
+        
+        Deque<Integer> queue = new LinkedList<>(); // stores index of nums
+        int[] res = new int[nums.length - k + 1];
+        int idx = 0;
+        
+        for (int i = 0; i < nums.length; i++) {
+            while (!queue.isEmpty() && queue.peek() < i - k + 1) {
+                queue.poll();
+            }
+            while (!queue.isEmpty() && nums[queue.peekLast()] < nums[i]) {
+                queue.removeLast();
+            }
 
-        Myqueue myQueue = new Myqueue();
-        int[] result = new int[nums.length - k + 1];
-        int index = 0;
+            queue.offer(i);
 
-        for (int i = 0; i < k; i++) {
-            myQueue.add(nums[i]);
+            if (i >= k - 1) {
+                res[idx++] = nums[queue.peek()];
+            }
         }
-        result[index++] = myQueue.peek(); 
-        for (int i = k; i < nums.length; i++) {
-            myQueue.poll(nums[i - k]);
-            myQueue.add(nums[i]);
-            result[index++] = myQueue.peek();
-        }
-        return result;
-    }
-}
-
-class Myqueue {
-    Deque<Integer> deque = new LinkedList<>();
-    
-    void poll(int value) {
-        if (!deque.isEmpty() && deque.peek() == value) {
-            deque.poll();
-        }
-    }
-
-    void add(int value) {
-        while (!deque.isEmpty() && deque.peekLast() < value) {
-            deque.removeLast();
-        }
-        deque.add(value);
-    }
-
-    int peek() {
-        return deque.peek();
+        return res;
     }
 }
