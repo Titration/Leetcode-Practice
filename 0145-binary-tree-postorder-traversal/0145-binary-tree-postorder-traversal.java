@@ -15,17 +15,33 @@
  */
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
+        
         List<Integer> result = new ArrayList<>();
-        traversal(root, result);
-        return result;
-    }
-
-    public void traversal(TreeNode root, List<Integer> result) {
         if (root == null) {
-            return;
+            return result;
         }
-        traversal(root.left, result);
-        traversal(root.right, result);
-        result.add(root.val);
+        
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.push(root);
+        while (!deque.isEmpty()) {
+            TreeNode curr = deque.pop();
+            result.add(curr.val);
+            if (curr.left != null) {
+                deque.push(curr.left);
+            }
+            if (curr.right != null) {
+                deque.push(curr.right);
+            }
+        }
+        
+        int left = 0, right = result.size() - 1;
+        while (left < right) {
+            int temp = result.get(left);
+            result.set(left, result.get(right));
+            result.set(right, temp);
+            left++;
+            right--;
+        }
+        return result;
     }
 }
