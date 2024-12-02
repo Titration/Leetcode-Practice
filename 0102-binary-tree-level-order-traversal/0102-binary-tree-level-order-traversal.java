@@ -14,31 +14,26 @@
  * }
  */
 class Solution {
+    public List<List<Integer>> result = new ArrayList<>();
+
     public List<List<Integer>> levelOrder(TreeNode root) {
         
-        List<List<Integer>> result = new ArrayList<>();
-        if (root == null) {
-            return result;
-        }
-        
-        Deque<TreeNode> deque = new ArrayDeque<>();
-        deque.add(root);
-        while (!deque.isEmpty()) {
-            List<Integer> level = new ArrayList<>();
-            int size = deque.size();
-            for (int i = 0; i < size; i++) {
-                TreeNode curr = deque.removeFirst();
-                level.add(curr.val);
-                if (curr.left != null) {
-                   deque.add(curr.left);
-                }
-                if (curr.right != null) {
-                   deque.add(curr.right);
-                }
-            }
-            result.add(level);
-        }
-        
+        traversal(root, 0);
         return result;
+    }
+
+    public void traversal(TreeNode root, int depth) {
+        if (root == null) {
+            return;
+        }
+        depth++;
+        if (result.size() < depth) {
+            List<Integer> itemList = new ArrayList<>();
+            result.add(itemList);
+        }
+        result.get(depth - 1).add(root.val);
+
+        traversal(root.left, depth);
+        traversal(root.right, depth);
     }
 }
